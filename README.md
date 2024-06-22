@@ -29,11 +29,13 @@ Below is a high-level overview of the sytem.
 ## Web App
 A web app using [Streamlit](https://streamlit.io/) is build as a UI. To run the web app simply run the below command.
 
-    ```bash
-    streamlit run web_app.py
-    ```
+```bash
+streamlit run web_app.py
+```
     
 ## Models and data
+#### Models:
+
 In RAG system there can be lots of models, for this repo the used models are:
 
 | Name | Objective | link |
@@ -41,15 +43,16 @@ In RAG system there can be lots of models, for this repo the used models are:
 | meta-llama-3-8b-instruct.Q4_K_M.gguf | A quantized LLM Llama 3 8b model with GGUF format for llama.cpp usage  | [HF](https://huggingface.co/SanctumAI/Meta-Llama-3-8B-Instruct-GGUF/tree/main) |
 | Alibaba-NLP/gte-base-en-v1.5 | An embedding model that support the context length of up to 8192 ranks high on [MTEB](https://huggingface.co/spaces/mteb/leaderboard)  | [HF](https://huggingface.co/Alibaba-NLP/gte-base-en-v1.5) |
 
+#### Data:
 For data, The [LoL Wiki](https://leagueoflegends.fandom.com/wiki/League_of_Legends_Wiki) has an [offical data dump](https://leagueoflegends.fandom.com/wiki/Special:Statistics) that was parsed, cleaned, and embedded into a vector database.
 
-All links to download the models and the data are available in the code.
+All links to download the models and the data are available in the repo.
 
 ## Reproducibility 
 The repository's code serves as a strong foundation for the potential extension of this RAG system to encompass different Wiki/fandom domains.
 
 ## Hardware requirments
-I managed to run the quantized llama3 on a laptop with 16GB of ram and a rtx 3060 with 6GB of vram, while it takes about 2-10 to answer a query on the whole RAG pipeline [Retrieval, information extraction and summarization, prompt answering], it is astonishing just how much you can get on mid tier laptop.
+I managed to run the quantized llama3 on a laptop with 16GB of ram and a rtx 3060 with 6GB of vram, while it takes about 2-10 seconds to answer a query on the whole RAG pipeline [Retrieval, information extraction and summarization, prompt answering], it is astonishing just how much you can get on mid tier laptop.
 
 ## References
 

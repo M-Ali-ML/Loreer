@@ -66,17 +66,24 @@ def prompt_extract_from_context(llm, question, context, temperature,max_tokens):
 
     summary_from_context = []
     for passage in context:
-        extraction_prompt = f"""
-        You are an AI assistance based on to this question: {question} 
-        extract related information and summarize them from the given passage, 
-        If the passage doesn't have related information, return [none].
-        The passage: {passage}.
-        If the passage doesn't have related information, return [none].
-        """
+        # extraction_prompt = f"""
+        # You are an AI assistance based on to this question: {question} 
+        # extract related information and summarize them from the given passage, 
+        # If the passage doesn't have related information, return [none].
+        # The passage: {passage}.
+        # If the passage doesn't have related information, return [none].
+        # """
+        extraction_prompt = f"""<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+You are an AI assistance that extracts related information to a given question and summarize them from the given lore info, If no related information found, return [none]<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Lore info: {passage}, the question: {question}<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+"""
+
         output = llm(
         extraction_prompt,
         max_tokens=max_tokens, # set to None to generate up to the end of the context window
-        stop=["Q:"], # Stop generating just before the model would generate a new question
+        stop=["Q:", "none"], # Stop generating just before the model would generate a new question
         echo=False,
         temperature=temperature,
     ) # Generate a completion, can also call create_completion
@@ -101,16 +108,21 @@ def get_reference(topk, data, kept_indices, site):
     return ref
 
 def prompt_chat(llm, question, filtered_summary, temperature,max_tokens):
-    prompt_chat = f"""
-    You are loreer, a wise and old AI assistance that knows all the stories about League of legends and its lore.
-    With the following passage: {filtered_summary} from League of Legend wiki, answer this question:{question} in a very articulate and sophisticated way.
-    Also don't mention that you have the passage beforehand, Instead, you will describe Zed's story and abilities as if you were loreer.
-    
-    """ 
+#     prompt_chat = f"""You are loreer, a wise and old AI assistance that knows all the stories about League of legends and its lore.
+#     With the following passage: {filtered_summary} from League of Legend lore. 
+#     Don't mention the passage, Instead, you will answer this question: {question} as if you were loreer in a very articulate and sophisticated way.
+# """ 
+    prompt_chat = f"""<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+You are loreer, a wise and old AI assistance that knows all the stories about League of legends and its lore, answer the question based on the lore info provided in a very articulate and sophisticated way<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+info: {filtered_summary}, question: {question}<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+"""
+
     output = llm(
     prompt_chat,
     max_tokens=max_tokens, # set to None to generate up to the end of the context window
-    stop=["Q:"], # Stop generating just before the model would generate a new question
+    stop=["Q:"], # Stop generating
     echo=False,
     temperature=temperature,
     ) # Generate a completion, can also call create_completion
@@ -125,6 +137,22 @@ def add_reference(chat_output, ref):
             links = links + str(index + 1) +". " + link.replace(" ", "_") + "\n"
         chat_output = chat_output + links
     return chat_output
+
+def debugger(file, context,summary_from_context, filtered_summary, chat_output):
+    with open(file, "w") as temp:
+        temp_text  = "Context: \n"
+        for chunk in context:
+            temp_text = temp_text + textwrap.fill(chunk, width=150)
+            temp_text = temp_text + "\n\n\n"
+        temp_text = temp_text + "Summary from context: \n"
+        for chunk in summary_from_context:
+            temp_text = temp_text + textwrap.fill(chunk, width=150)
+            temp_text = temp_text + "\n\n\n"
+
+        temp_text = temp_text + "filtered summary:\n" + filtered_summary + "\n"
+        temp_text = temp_text + "chat output: \n" + chat_output
+        temp.write(temp_text)
+
 
 # combines all functions
 def loreer(question,
@@ -151,6 +179,8 @@ def loreer(question,
        ref = get_reference(topk, data, kept_indices, site)
        chat_output = prompt_chat(llm, question, filtered_summary, temperature[1],max_tokens[1])
        chat_output = add_reference(chat_output, ref)
+       debugger("temp.txt", context,summary_from_context, filtered_summary, chat_output)     
+
        return chat_output
 
 
