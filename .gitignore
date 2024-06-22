@@ -1,7 +1,10 @@
 # data
 data/*.xml
 data/*.csv
+data/*.pt
 
+#models
+models/*
 
 
 # Byte-compiled / optimized / DLL files
