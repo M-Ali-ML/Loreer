@@ -6,6 +6,10 @@ data/*.pt
 #models
 models/*
 
+# hidden files
+.env
+
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
