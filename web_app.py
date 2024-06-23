@@ -83,7 +83,7 @@ Lore info: {passage}, the question: {question}<|eot_id|><|start_header_id|>assis
         output = llm(
         extraction_prompt,
         max_tokens=max_tokens, # set to None to generate up to the end of the context window
-        stop=["Q:", "none"], # Stop generating just before the model would generate a new question
+        stop=["Q:"], # Stop generating just before the model would generate a new question
         echo=False,
         temperature=temperature,
     ) # Generate a completion, can also call create_completion
