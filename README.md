@@ -5,7 +5,7 @@ Loreer is a sophisticated AI assistant designed to provide comprehensive knowled
 This RAG system is built upon [League of Legends (LoL)](https://www.leagueoflegends.com/en-us/) lore and can precisely answer any LoL lore related questions.
 
 Below is a high-level overview of the system.
-![Loreer-design (1)](./assets/Loreer-design.png)
+![Loreer-design)](./assets/Loreer-design.png)
 ###### [link to whiteboard](https://whimsical.com/loreer-design-DQbf9fQs6HfMCJRimPsLon)
 
  ## Features
