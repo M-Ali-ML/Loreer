@@ -1,17 +1,17 @@
-# Loreer (WIB)
+# Loreer
 ![lorrer_gif](./assets/loreer.gif)
 
 Loreer is a sophisticated AI assistant designed to provide comprehensive knowledge on various lores, including movies, series, games, and books. Powered by advanced Large Language Models (LLMs), Loreer utilizes a Retrieval-Augmented Generation (RAG) system to deliver precise and relevant information.
-This RAG system is built upon [League of Legends (LoL)](https://www.leagueoflegends.com/en-us/) lore and can precisely answer any LoL lore related questions.
+This RAG system is built upon [League of Legends (LoL)](https://www.leagueoflegends.com/en-us/) lore and can precisely answer any LoL's lore related questions.
 
 Below is a high-level overview of the system.
 ![Loreer-design)](./assets/Loreer-design.png)
 ###### [link to whiteboard](https://whimsical.com/loreer-design-DQbf9fQs6HfMCJRimPsLon)
 
- ## Features
+## Features
 
 - Comprehensive lore knowledge
-- Powered by advanced LLMs and AI
+- Powered by state-of-the-art LLM
 - Efficient data processing and embedding
 - Local RAG system integration
 
