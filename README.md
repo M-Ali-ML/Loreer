@@ -54,6 +54,8 @@ The repository's code serves as a strong foundation for the potential extension 
 ## Hardware requirments
 I managed to run the quantized llama3 on a laptop with 16GB of ram and a rtx 3060 with 6GB of vram, while it takes about 2-10 seconds to answer a query on the whole RAG pipeline [Retrieval, information extraction and summarization, prompt answering], it is astonishing just how much you can get on mid tier laptop.
 
+This improvement is attributed to the utilization of [llama.cpp](https://github.com/ggerganov/llama.cpp), which facilitates C++ inference for large language models (LLMs). This approach significantly reduces the overhead, low speed, and high resources consumption associated with Python.
+
 ## References
 
 - https://developer.nvidia.com/blog/rag-101-demystifying-retrieval-augmented-generation-pipelines/
